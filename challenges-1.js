@@ -72,7 +72,7 @@ const getCasualityCountForClass = (data, pclass) => {
 }
 
 // 7 ---------------------------------------------------------------
-// Return the age of the youngest passenger. You'll need to filter
+// Return the age of the youngest passenger. You need to filter
 // passenger data where the age is missing. 
 
 const getMinAge = (data) => {
@@ -177,8 +177,7 @@ const getAverageAge = (data) => {
 }
 
 // 19 --------------------------------------------------------------
-// Return the median age from passengers. Do that median thing of 
-// finding the middle value. 
+// Return the median age from passengers.
 
 const getMedianAge = (data) => {
 	return 0
