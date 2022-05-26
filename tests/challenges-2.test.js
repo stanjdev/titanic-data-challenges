@@ -164,12 +164,12 @@ describe('Challenge 2 Titanic', () => {
 			return acc 
 		}, [])
 
-		console.log('Ages 5 ---------------')
-		console.log(ages10)
 		console.log('Ages 10 ---------------')
-		console.log(ages5)
+		console.log(Array.from(ages10, v => v || 0))
+		console.log('Ages 5 ---------------')
+		console.log(Array.from(ages5, v => v || 0))
 		console.log('Fares ---------------')
-		console.log(fares)
+		console.log(Array.from(fares, v => v || 0))
 
 		expect(index.makeHistogram(data, 'age', 10)).toEqual(Array.from(ages10, v => v || 0))
 		expect(index.makeHistogram(data, 'age', 5)).toEqual(Array.from(ages5, v => v || 0))

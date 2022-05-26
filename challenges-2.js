@@ -83,10 +83,79 @@ const countAllProperty = (data, property) => {
 const makeHistogram = (data, property, step) => {
 	const filteredData = data.filter((passenger) => passenger.fields[property] !== undefined);
 	const values = filteredData.map((passenger) => passenger.fields[property]);
-	const buckets = {};
-	values.forEach((value) => buckets[value] ? buckets[value]++ : buckets[value] = 1);
-	return buckets;
+	const maxValue = Math.max(...values);
+	const numBuckets = Math.floor(maxValue / step);
+	const buckets = values.reduce((acc, value) => {
+		const slot = Math.floor(value / step);
+		acc[slot] === undefined ? acc[slot] = 1 : acc[slot] += 1;
+		return acc;
+	}, Array(numBuckets).fill(0))
+	return buckets
+
+	// // step is the bucket. 0-5, 6-10, etc. 
+	// const maxValue = Math.max(...values);
+	// const numBuckets = Math.floor(maxValue / step);
+	// const buckets = Array(numBuckets).fill(0);
+	// values.forEach((value) => {
+	// 	const slot = Math.floor(value / step);
+	// 	buckets[slot] === undefined ? buckets[slot] = 1 : buckets[slot] += 1;
+	// });
+	// console.log(buckets)
+	// return buckets;
 }
+
+/* 
+Array [
+    -   62,
+    -   102,
+    -   220,
+    -   167,
+    -   89,
+    -   48,
+    -   19,
+    -   6,
+    -   1,
+    - ]
+
+		 [ 62, 102, 220, 167, 89, 48, 19, 6, 1, <1 empty item> ]
+
+
+		 [
+      62, 102, 220, 167, 89,
+      48,  19,   6,   1
+    ]
+
+      at Object.<anonymous> (tests/challenges-2.test.js:168:11)
+
+  console.log
+    Ages 5 ---------------
+
+      at Object.<anonymous> (tests/challenges-2.test.js:169:11)
+
+  console.log
+		[
+      40, 22, 16, 86, 114, 106, 95,
+      72, 48, 41, 32,  16,  15,  4,
+       6,  0,  1
+    ]
+
+      at Object.<anonymous> (tests/challenges-2.test.js:170:11)
+
+  console.log
+    Fares ---------------
+
+      at Object.<anonymous> (tests/challenges-2.test.js:171:11)
+
+  console.log
+		[
+      336, 179, 136, 64, 15, 39, 17, 29, 15, 8, 4,
+        7,   4,   7,  2,  7,  2,  0,  0,  0, 0, 4,
+        5,   0,   2,  0,  6,  0,  0,  0,  0, 0, 0,
+        0,   0,   0,  0,  0,  0,  0,  0,  0, 0, 0,
+        0,   0,   0,  0,  0,  0,  0,  3
+    ]
+
+*/
 
 // 7 ------------------------------------------------------------
 // normalizeProperty takes data and a property and returns an 
