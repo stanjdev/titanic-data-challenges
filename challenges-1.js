@@ -169,14 +169,15 @@ const getAverageFare = (data) => {
 // 4 + 5 = 9 / 2 median is 4.5!
 
 const getMedianFare = (data) => {
-	const passengerFares = allFares(data).sort((a, b) => a - b);
-	const len = passengerFares.length;
+	const passengerFares = allFares(data);
+	const sortedFares = passengerFares.sort((a, b) => a - b);
+	const len = sortedFares.length;
 	if (len % 2 === 0) {
 		const j = Math.floor(len / 2);
 		const i = j - 1;
-		return (passengerFares[j] + passengerFares[i]) / 2;
+		return (sortedFares[j] + sortedFares[i]) / 2;
 	} else {
-		return passengerFares[Math.floor(len / 2)];
+		return sortedFares[Math.floor(len / 2)];
 	}
 }
 
